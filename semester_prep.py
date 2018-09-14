@@ -21,13 +21,6 @@ except:
     import pandas as pd
 
 try:
-    from gspread_pandas import Spread, conf
-except:
-    import pip
-    pip.main(['install', 'gspread-pandas'])
-    from gspread_pandas import Spread, conf
-
-try:
     import json
 except:
     import pip
@@ -39,6 +32,16 @@ from lib.canvas_blueprint import get_associated_courses
 
 import re, getpass
 
+'''
+Request the list of users for a course depending on requested type
+Parameters:
+    token: Canvas API token
+    url: Canvas version URL
+    course: ID of desired course
+    user_type: type of user to find (ta, teacher, student)
+Returns:
+    A pandas dataframe that represents a list of people with that user_type
+'''
 def get_users(token, url, course, user_type):
     payload = {'enrollment_type[]': user_type}
     user_list = requests.get(url + '/api/v1/courses/{}/users'.format(course),
@@ -47,6 +50,13 @@ def get_users(token, url, course, user_type):
     user_list = paginate_list(user_list, token)
     return user_list
 
+'''
+Checks if there is a syllabus download link in 'Syllabus' Tab for course
+Paramters:
+    syllabus_body: The body of the syllabus
+Returns:
+    String signifying result, True, False
+'''
 def syllabus_presence(syllabus_body):
 
     list_here = re.findall(r'(title=\"(.*?).pdf\" href=\"(.*?)\")', syllabus_body)
@@ -63,6 +73,16 @@ def syllabus_presence(syllabus_body):
         else:
             return 'False'
 
+'''
+Matches each course with its blueprint
+Parameters:
+    token: Canvas API token
+    url: Canvas URL
+    dataframe: Original dataframe to edit
+    master: Master subaccount to look under for blueprints
+Returns:
+    A pandas dataframe with blueprint urls of each course added
+'''
 def find_blueprints(token, url, dataframe, master):
     master_list = requests.get(url + '/api/v1/accounts/{}/courses'.format(master),
                                headers = {'Authorization': 'Bearer ' + token})
@@ -96,6 +116,16 @@ def find_blueprints(token, url, dataframe, master):
 
     return modified_table
 
+'''
+Get courses in a subaccount (those blueprint associated or those not)
+Params:
+    account_id: Subaccount ID to look through
+    token: Canvas API token
+    url: Canvas url
+    payload: True or False, whether we want blueprint associated child courses, or non-associated
+Returns:
+    Pandas dataframe list of courses
+'''
 def get_blueprint_associated_courses(account_id, token, url, payload):
     returned_list = None
 
@@ -116,6 +146,16 @@ def get_blueprint_associated_courses(account_id, token, url, payload):
 
     return returned_list
 
+'''
+Creation of the result database
+Params:
+    dataframe: Original pandas dataframe/list of classes
+    master: Master subaccount to look for bluepritns under
+    input_term: Desired school term to look under (e.g. 2018W1)
+Returns:
+    A pandas dataframe with 'Account ID', 'Blueprint Associated', 'Blueprint URL' 'Course ID', 'Course URL', 'Course Name', 'Course Code', 'Instructors',
+    'Enrolments', 'TA list', 'Observors', 'Published?', 'Term', & 'Syllabus Present?' for each course (each row is a course).
+'''
 def clean_up_dataframe(dataframe, master, input_term):
 
     course_list = dataframe
@@ -200,6 +240,16 @@ def clean_up_dataframe(dataframe, master, input_term):
 
     return course_list
 
+'''
+Get raw info of all classes under a subaccount
+Params:
+    account_id: Subaccount ID
+    token: Canvas API token
+    url: Canvas URL
+    master_id: Master Account ID to look for blueprints under
+Returns:
+    Prints to CSV, named {enteredTerm}.csv
+'''
 def get_subaccount_classes(account_id, token, url, master_id):
 
     print('\nGetting courses...')
