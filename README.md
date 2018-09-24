@@ -1,7 +1,7 @@
 ![Image of Sauder](http://www.hec.ca/en/executive-education/news/2018/logo-UBC-Sauder.jpg)
 
-# subaccount-course-info
-Collects and formats course information under a subaccount (i.e.: Course Names, URLs, course code, enrollments, Term, instructors, etc.) into a CSV. See output_example.csv for example.
+# Subaccount: Course Information
+Collects and formats course information under a subaccount (i.e.: Course Names, URLs, course code, enrollments, Term, instructors, etc.) into a CSV. See output_example.csv for example. *Authors: Barish G., Jeremy H., Victor S.*
 
 ## Instructions:
 1. If you do not have Python, install it. If you have no experience with it, I recommend installing it through *https://www.anaconda.com/download/*.
