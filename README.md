@@ -1,4 +1,4 @@
-![Image of Sauder](http://www.hec.ca/en/executive-education/news/2018/logo-UBC-Sauder.jpg)
+![Image of UBC](https://physicaltherapy.med.ubc.ca/files/2012/05/UBC-logo-signature-blue.gif)
 
 # Subaccount: Course Information
 Collects and formats course information under a subaccount (i.e.: Course Names, URLs, course code, enrollments, Term, instructors, etc.) into a CSV. See output_example.csv for example. *Author(s): Barish G., Jeremy H., Victor S.*
