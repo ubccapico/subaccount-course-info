@@ -1,4 +1,6 @@
-![Image of UBC](https://physicaltherapy.med.ubc.ca/files/2012/05/UBC-logo-signature-blue.gif)
+<p align="center">
+<img src="https://physicaltherapy.med.ubc.ca/files/2012/05/UBC-logo-signature-blue.gif" height=15% width=15%
+</p>
 
 # Subaccount: Course Information
 Collects and formats course information under a subaccount (i.e.: Course Names, URLs, course code, enrollments, Term, instructors, etc.) into a CSV. See output_example.csv for example. *Author(s): Barish G., Jeremy H., Victor S.*
