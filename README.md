@@ -16,4 +16,4 @@ Collects and formats course information under a subaccount (i.e.: Course Names, 
    3. Chosen Subaccount ID, this is the subaccount you want to get course information for.
    4. Canvas term to look into.
 
-**Please note this script is rather slow. Due to the risk of taking down the AWS server, all API calls are done on a single thread**
+**Please note this script is rather slow. Due to the risk of taking down the AWS server, all API calls are done on a single thread.**
