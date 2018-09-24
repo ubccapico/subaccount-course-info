@@ -1,0 +1,4 @@
+tqdm==4.26.0
+pandas==0.23.4
+requests==2.18.4
+json==2.0.9
